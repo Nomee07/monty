@@ -12,18 +12,22 @@ void addqueue(stack_t **head, int value);
  */
 void push(stack_t **head, unsigned int counter)
 {
-	int n, j = 0, flag = 0;
+	int n, j = 0;
 
-	if (bus.arg)
+	if (bus.arg == NULL || bus.arg[0] == '\0')
 	{
-		if (bus.arg[0] == '-')
-			j++;
-		for (; bus.arg[j] != '\0'; j++)
-		{
-			if (bus.arg[j] > 57 || bus.arg[j] < 48)
-				flag = 1;
-		}
-		if (flag == 1)
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	if (bus.arg[0] == '-')
+		j++;
+
+	while (bus.arg[j] != '\0')
+	{
+		if (!isdigit(bus.arg[j]))
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", counter);
 			fclose(bus.file);
@@ -31,14 +35,7 @@ void push(stack_t **head, unsigned int counter)
 			free_stack(*head);
 			exit(EXIT_FAILURE);
 		}
-	}
-	else
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", counter);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
+		j++;
 	}
 	n = atoi(bus.arg);
 
@@ -60,9 +57,6 @@ void pall(stack_t **head, unsigned int counter)
 	(void) counter;
 
 	h = *head;
-
-	if (h == NULL)
-		return;
 
 	while (h)
 	{

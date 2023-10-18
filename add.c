@@ -6,13 +6,13 @@ void free_stack(stack_t *head);
 
 /**
  * add - Adds the top two elemnts of the stack
- * @head: Head of the stack
- * @counter: Line number
+ * @head: Double pointer to the head of the stack
+ * @counter: Line number in the Monty byte code file
  * Return: Nothing
  */
 void add(stack_t **head, unsigned int counter)
 {
-	stack_t *h;
+	stack_t *h, *temp;
 	int len = 0, result;
 
 	h = *head;
@@ -30,9 +30,10 @@ void add(stack_t **head, unsigned int counter)
 		exit(EXIT_FAILURE);
 	}
 	h = *head;
-	result = h->n + h->next->n;
+	temp = h->next;
+	result = h->n + temp->n;
 
-	h->next->n = result;
-	*head = h->next;
+	temp->n = result;
+	*head = temp->next;
 	free(h);
 }

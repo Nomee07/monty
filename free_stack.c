@@ -8,12 +8,11 @@ void free_stack(stack_t *head)
 {
 	stack_t *result;
 
-	result = head;
-
 	while (head)
 	{
 		result = head->next;
 		free(head);
 		head = result;
 	}
+	head = NULL;
 }
