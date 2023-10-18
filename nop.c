@@ -4,9 +4,12 @@
 
 /**
  * nop - Does nothing
+ * @head: Head of the stack
+ * @counter: Line number
  * Return: void
  */
-void nop(void)
+void nop(stack_t **head, unsigned int counter)
 {
-	/* No operation, do nothing */
+	(void) counter;
+	(void) head;
 }

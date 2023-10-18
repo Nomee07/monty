@@ -2,40 +2,71 @@
 #include <stdlib.h>
 #include "monty.h"
 
+void addqueue(stack_t **head, int value);
+
 /**
  * push - Pushes an element onto the stack
- * @value: Integer value to be pushed
- * Return: void
+ * @head: Head of the stack
+ * @counter: Line number
+ * Return: Nothing
  */
-void push(int value)
+void push(stack_t **head, unsigned int counter)
 {
-	stack_t *new_node = malloc(sizeof(stack_t));
+	int n, j = 0, flag = 0;
 
-	if (new_node  == NULL)
+	if (bus.arg)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		if (bus.arg[0] == '-')
+			j++;
+		for (; bus.arg[j] != '\0'; j++)
+		{
+			if (bus.arg[j] > 57 || bus.arg[j] < 48)
+				flag = 1;
+		}
+		if (flag == 1)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", counter);
+			fclose(bus.file);
+			free(bus.content);
+			free_stack(*head);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = stack;
+	n = atoi(bus.arg);
 
-	if (stack != NULL)
-		stack->prev = new_node;
-	stack = new_node;
+	if (bus.lifi == 0)
+		addnode(head, n);
+	else
+	addqueue(head, n);
 }
 
 /**
  * pall - Prints all the values on the stack
- * Return: void
+ * @head: Head of the stack
+ * @counter: Not used
+ * Return: Nothing
  */
-void pall(void)
+void pall(stack_t **head, unsigned int counter)
 {
-	stack_t *temp = stack;
+	stack_t *h;
+	(void) counter;
 
-	while (temp != NULL)
+	h = *head;
+
+	if (h == NULL)
+		return;
+
+	while (h)
 	{
-		printf("%d\n", temp->n);
-		temp = temp->next;
+		printf("%d\n", h->n);
+		h = h->next;
 	}
 }

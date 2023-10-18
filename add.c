@@ -2,17 +2,37 @@
 #include <stdlib.h>
 #include "monty.h"
 
+void free_stack(stack_t *head);
+
 /**
  * add - Adds the top two elemnts of the stack
- * Return: void
+ * @head: Head of the stack
+ * @counter: Line number
+ * Return: Nothing
  */
-void add(void)
+void add(stack_t **head, unsigned int counter)
 {
-	if (stack == NULL || stack->next == NULL)
+	stack_t *h;
+	int len = 0, result;
+
+	h = *head;
+
+	while (h)
 	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", stackPointer);
+		h = h->next;
+		len++;
+	}
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", counter);
+		fclose(bus.file);
+		free(bus.content);
 		exit(EXIT_FAILURE);
 	}
-	stack->next->n += stack->n;
-	pop();
+	h = *head;
+	result = h->n + h->next->n;
+
+	h->next->n = result;
+	*head = h->next;
+	free(h);
 }

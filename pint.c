@@ -4,14 +4,19 @@
 
 /**
  * pint - Prints the value at the top of the stack
- * Return: void
+ * @head: Head of the stack
+ * @counter: Line number
+ * Return: Nothing
  */
-void pint(void)
+void pint(stack_t **head, unsigned int counter)
 {
-	if (stack == NULL)
+	if (*head == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", stackPointer);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", stack->n);
+	printf("%d\n", (*head)->n);
 }

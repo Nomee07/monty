@@ -4,18 +4,24 @@
 
 /**
  * pop - Removes the top element of the stack
- * Return: void
+ * @head: Head of the stack
+ * @counter: Line number
+ * Return: Nothing
  */
-void pop(void)
+void pop(stack_t **head, unsigned int counter)
 {
-	stack_t *temp = stack;
+	stack_t *h;
 
-	if (stack == NULL)
+	if (*head == NULL)
 	{
-		fprintf(stderr, "L%d: can't pop an empty stack\n", stackPointer);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
 		exit(EXIT_FAILURE);
 	}
 
-	stack = stack->next;
-	free(temp);
+	h = *head;
+	*head = h->next;
+	free(h);
 }
