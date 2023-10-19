@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "monty.h"
 
 void addqueue(stack_t **head, int value);

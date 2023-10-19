@@ -1,6 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 #define _GNU_SOURCE
+#define _POSIX_C_SOURCE 200809L
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,10 +41,7 @@ typedef struct bus_s
 	char *content;
 	int lifi;
 } bus_t;
-
 extern bus_t bus;
-
-int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
 
 /**
  * struct instruction_s - opcode and its function
@@ -59,7 +57,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-
 void push(stack_t **head, unsigned int counter);
 void pall(stack_t **head, unsigned int counter);
 void pint(stack_t **head, unsigned int counter);
@@ -72,6 +69,7 @@ void free_stack(stack_t *head);
 void stack(stack_t **head, unsigned int counter);
 void f_queue(stack_t **head, unsigned int counter);
 void addqueue(stack_t **head, int n);
+int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
 void rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
 void rotl(stack_t **head,  __attribute__((unused)) unsigned int counter);
 void print_string(stack_t **head, unsigned int counter);
