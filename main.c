@@ -33,12 +33,21 @@ int main(int argc, char *argv[])
 	}
 	while ((read_line = getline(&content, &size, file)) > 0)
 	{
-		bus.content = content;
+		bus.content = strdup(content);
+		if (bus.content == NULL)
+		{
+			fprintf(stderr, "Error: strdup failed\n");
+			free_stack(stack);
+			fclose(file);
+			free(content);
+			return (EXIT_FAILURE);
+		}
 		counter++;
 		execute(content, &stack, counter, file);
-		free(content);
+		free(bus.content);
 	}
 	free_stack(stack);
 	fclose(file);
-	return (0);
+	free(content);
+	return (EXIT_SUCCESS);
 }
