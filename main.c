@@ -1,6 +1,5 @@
-#define _POSIX_C_SOURCE 200809L
-#define _GNU_SOURCE
 #include "monty.h"
+bus_t bus = {NULL, NULL, NULL, 0};
 
 
 /**
@@ -11,7 +10,6 @@
 */
 int main(int argc, char *argv[])
 {
-	bus_t bus = {NULL, NULL, NULL, 0};
 	FILE *file;
 	stack_t *stack = NULL;
 	size_t size;
