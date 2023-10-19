@@ -21,10 +21,11 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
+
 /**
  * struct bus_s - variables -args, file, line content
  * @arg: Value
@@ -42,6 +43,8 @@ typedef struct bus_s
 
 extern bus_t bus;
 
+int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -52,8 +55,8 @@ extern bus_t bus;
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 
@@ -67,7 +70,6 @@ void nop(stack_t **head, unsigned int counter);
 void addnode(stack_t **head, int n);
 void free_stack(stack_t *head);
 void stack(stack_t **head, unsigned int counter);
-int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
 void f_queue(stack_t **head, unsigned int counter);
 void addqueue(stack_t **head, int n);
 void rotr(stack_t **head, __attribute__((unused)) unsigned int counter);

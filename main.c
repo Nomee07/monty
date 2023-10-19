@@ -2,7 +2,6 @@
 #define _GNU_SOURCE
 #include "monty.h"
 
-bus_t bus = {NULL, NULL, NULL, 0};
 
 /**
 * main - Entry point of the monty program
@@ -12,6 +11,7 @@ bus_t bus = {NULL, NULL, NULL, 0};
 */
 int main(int argc, char *argv[])
 {
+	bus_t bus = {NULL, NULL, NULL, 0};
 	FILE *file;
 	stack_t *stack = NULL;
 	size_t size;
