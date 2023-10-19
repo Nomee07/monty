@@ -1,5 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,5 +70,13 @@ void stack(stack_t **head, unsigned int counter);
 int execute(char *content, stack_t **stack, unsigned int counter, FILE *file);
 void f_queue(stack_t **head, unsigned int counter);
 void addqueue(stack_t **head, int n);
+void rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
+void rotl(stack_t **head,  __attribute__((unused)) unsigned int counter);
+void print_string(stack_t **head, unsigned int counter);
+void print_char(stack_t **head, unsigned int counter);
+void subtract(stack_t **head, unsigned int counter);
+void mul(stack_t **head, unsigned int counter);
+void mod(stack_t **head, unsigned int counter);
+void division(stack_t **head, unsigned int counter);
 
 #endif
