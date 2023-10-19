@@ -1,6 +1,6 @@
+#include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "monty.h"
 
 void free_stack(stack_t *head);
 

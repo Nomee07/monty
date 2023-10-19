@@ -1,6 +1,7 @@
 #include "monty.h"
+#define _GNU_SOURCE
+#define _POSIX_C_SOURCE 200809L
 bus_t bus = {NULL, NULL, NULL, 0};
-
 
 /**
 * main - Entry point of the monty program
